@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "./RootStackParams";
+import { RootStackParamList } from "../navigation/RootStackParams";
 import { Text, Image, TextInput, View, Button } from "react-native";
 import { User } from "firebase/auth";
 import { auth, storage, db } from "../firebase";

@@ -13,12 +13,13 @@ import {
 // import { Button,Input } from 'react-native-elements';
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "./RootStackParams";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Auth } from "../components/auth";
+// import { Auth } from "../components/auth";
 import { Button, Input } from "@rneui/themed";
+import { RootStackParamList } from "../navigation/RootStackParams";
+
 type loginScreenProp = StackNavigationProp<RootStackParamList, "Login">;
 
 export default function LoginScreen() {
@@ -30,7 +31,7 @@ export default function LoginScreen() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser: any) => {
       if (authUser) {
-        navigation.replace("Feed");
+        navigation.navigate("Feed");
       }
     });
     return unsubscribe;

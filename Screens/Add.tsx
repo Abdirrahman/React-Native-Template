@@ -11,8 +11,9 @@ import {
 import { Camera, CameraType } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "./RootStackParams";
+import { RootStackParamList } from "../navigation/RootStackParams";
 import * as ImagePicker from "expo-image-picker";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 type addScreenProp = StackNavigationProp<RootStackParamList, "Add">;
 
@@ -75,20 +76,33 @@ export default function AddScreen() {
           ratio={"1:1"}
         />
       </View>
-      <Button
-        title="Flip"
-        onPress={() => {
-          setType(
-            type === CameraType.back ? CameraType.front : CameraType.back
-          );
-        }}
-      ></Button>
-      <Button title="takepic" onPress={takePicture} />
-      <Button title="pickpic" onPress={pickImage} />
-      <Button
+      <View style={styles.btt}>
+        <Ionicons
+          name="arrow-redo-circle"
+          size={32}
+          color="blue"
+          onPress={() => {
+            setType(
+              type === CameraType.back ? CameraType.front : CameraType.back
+            );
+          }}
+        />
+        <Ionicons name="camera" size={32} color="blue" onPress={takePicture} />
+
+        <Ionicons name="image" size={32} color="blue" onPress={pickImage} />
+
+        <Ionicons
+          name="save"
+          size={32}
+          color="blue"
+          onPress={() => navigation.navigate("Save", { image })}
+        />
+      </View>
+
+      {/* <Button
         title="Save"
         onPress={() => navigation.navigate("Save", { image })}
-      />
+      /> */}
       {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
     </View>
   );
@@ -108,5 +122,11 @@ const styles = StyleSheet.create({
   fixedRatio: {
     flex: 1,
     aspectRatio: 1,
+  },
+  btt: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
 });
